@@ -17,7 +17,8 @@ trait FileHandler
      */
     public function packagesPath()
     {
-        return base_path('packages');
+        $packagePath = config('packager.paths.modules', 'packages');
+        return base_path($packagePath);
     }
 
     /**
@@ -96,7 +97,8 @@ trait FileHandler
      */
     public function removeDir($path)
     {
-        if ($path == 'packages' || $path == '/') {
+        $packagesPath = config('packager.paths.modules', 'packages');
+        if ($path == $packagesPath || $path == '/') {
             return false;
         }
 

@@ -89,9 +89,10 @@ class Wrapping
     public function addToComposer($vendor, $package)
     {
         [$vendor, $package] = $this->formatVars($vendor, $package);
+        $packagesPath = config('packager.paths.modules', 'packages');
 
         return $this->replace('"psr-4": {', '"psr-4": {
-            "'.$vendor.'\\\\'.$package.'\\\\": "packages/'.$vendor.'/'.$package.'/src",')
+            "'.$vendor.'\\\\'.$package.'\\\\": "'.$packagesPath .'/'.$vendor.'/'.$package.'/src",')
                     ->fillInFile(base_path('composer.json'));
     }
 
@@ -104,7 +105,8 @@ class Wrapping
      */
     public function removeFromComposer($vendor, $package)
     {
-        return $this->replace('"'.$vendor.'\\\\'.$package.'\\\\": "packages/'.$vendor.'/'.$package.'/src",', '')
+        $packagesPath = config('packager.paths.modules', 'packages');
+        return $this->replace('"'.$vendor.'\\\\'.$package.'\\\\": "'.$packagesPath.'/'.$vendor.'/'.$package.'/src",', '')
                     ->fillInFile(base_path('composer.json'));
     }
 

@@ -37,11 +37,13 @@ class CheckPackage extends Command
         $this->info('Using the SensioLabs Security Checker the composer.lock of the package is scanned for known security vulnerabilities in the dependencies.');
         $this->info('Make sure you have a composer.lock file first (for example by running "composer install" in the folder');
 
+        $packagePath = config('packager.paths.modules', 'packages');
+
         $checker = new SecurityChecker();
         $formatter = new SimpleFormatter($this->getHelperSet()->get('formatter'));
         $vendor = $this->argument('vendor');
         $name = $this->argument('name');
-        $lockfile = getcwd().'/packages/'.$vendor.'/'.$name.'/composer.lock';
+        $lockfile = getcwd().'/'.$packagePath.'/'.$vendor.'/'.$name.'/composer.lock';
         $vulnerabilities = $checker->check($lockfile);
 
         return $formatter->displayResults($this->output, $lockfile, $vulnerabilities);

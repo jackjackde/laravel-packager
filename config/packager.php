@@ -6,7 +6,15 @@ return [
      * The following skeleton will be downloaded for each new package.
      * Default: https://github.com/Jeroen-G/packager-skeleton/archive/master.zip
      */
-    'skeleton' => 'https://github.com/Jeroen-G/packager-skeleton/archive/master.zip',
+    'skeleton' => 'https://github.com/jackjackde/laravel-module-skeleton/archive/main.zip',
+    //'skeleton' => 'https://github.com/jackjackde/packager-skeleton/archive/main.zip',
+
+    /**
+     * The following path will be used to store the downloaded skeleton.
+     */
+    'paths' => [
+        'modules' => 'packages',
+    ],
 
     /*
      * When you run into issues downloading the skeleton, this might be because of

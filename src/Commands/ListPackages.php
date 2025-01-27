@@ -52,7 +52,8 @@ class ListPackages extends Command
     private function getPackagesList(): array
     {
         $composerFile = json_decode(file_get_contents(base_path('composer.json')), true);
-        $packagesPath = base_path('packages/');
+        $packagesPath = base_path(config('packager.paths.modules', 'packages') . '/');
+
         $repositories = $composerFile['repositories'] ?? [];
         $packages = [];
         foreach ($repositories as $name => $info) {
@@ -85,8 +86,9 @@ class ListPackages extends Command
     private function renderGitTable($packages): void
     {
         $gitPackages = [];
+        $packagesPath = config('packager.paths.modules', 'packages') . '/';
         foreach ($packages as $package) {
-            $gitPackages[] = array_merge($package, $this->getGitStatus('packages/'.$package[0].'/'.$package[1]));
+            $gitPackages[] = array_merge($package, $this->getGitStatus($packagesPath . $package[0].'/'.$package[1]));
         }
 
         $headers = ['Package', 'Path', 'Commits behind', 'Branch'];
