@@ -16,6 +16,13 @@ return [
         'modules' => 'packages',
     ],
 
+    /**
+     * Composer Settings
+     */
+    'composer' => [
+        'add_repository' => false,
+    ],
+
     /*
      * When you run into issues downloading the skeleton, this might be because of
      * a file regarding SSL certificates missing on the (Windows) OS.

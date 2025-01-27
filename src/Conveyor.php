@@ -157,6 +157,10 @@ class Conveyor
 
     public function addPathRepository()
     {
+        $addRepo = config('packager.composer.add_repository');
+        if ($addRepo === false) {
+            return null;
+        }
         $params = json_encode([
             'type' => 'path',
             'url' => $this->packagePath(),
